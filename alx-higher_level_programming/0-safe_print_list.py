@@ -9,7 +9,8 @@ def safe_print_list(my_list=[], x=0):
         except IndexError:
             break
     print("")
-    return (total);
+    return (total)
+
 
 '''
 def safe_print_list(my_list=[], x=0):
