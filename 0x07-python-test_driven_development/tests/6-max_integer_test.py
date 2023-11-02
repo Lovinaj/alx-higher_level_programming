@@ -1,96 +1,71 @@
 #!/usr/bin/python3
-"""Unittests for max_integer([..])."""
-
+"""Unittest for max_integer([..])
+"""
 import unittest
 max_integer = __import__('6-max_integer').max_integer
 
 
 class TestMaxInteger(unittest.TestCase):
-    '''
-        defines unittests for max_integer([..])
+    """unittest class for max_integer"""
+    def test_module_docstring(self):
+        """Tests for module docsting"""
+        m = __import__('6-max_integer').__doc__
+        self.assertTrue(len(m) > 1)
 
-        Args:
-            unittest.Testcase: for making the test
-    '''
+    def test_function_docstring(self):
+        """Tests for funstion docstring"""
+        f = max_integer.__doc__
+        self.assertTrue(len(f) > 1)
 
-    def ordered_list(self):
-        '''
-            ordered list
-        '''
+    def test_empty_list(self):
+        """Tests for empty list []"""
+        e = []
+        self.assertIsNone(max_integer(e))
 
-        olist = [1, 2, 3, 4, 5, 6]
-        self.assertEqual(max_integer(olist), 6)
+    def test_no_args(self):
+        """Tests for no arguments passed to func"""
+        self.assertIsNone(max_integer())
 
-    def unordered_list(self):
-        '''
-            unordered list
-        '''
+    def test_one_element(self):
+        """Tests for only one number in the list"""
+        o = [1]
+        self.assertEqual(max_integer(o), 1)
 
-        ulist = [1, 2, 4, 3, 6, 5]
-        self.assertEqual(max_integer(ulist), 6)
+    def test_positive_end(self):
+        """Tests for all positive with max at end"""
+        e = [2, 10, 8, 36, 14, 50]
+        self.assertEqual(max_integer(e), 50)
 
-    def descending_list(self):
-        '''
-            descending list
-        '''
+    def test_positive_middle(self):
+        """Tests for all positive with max in middle"""
+        m = [2, 10, 8, 360, 14, 50]
+        self.assertEqual(max_integer(m), 360)
 
-        dlist = [6, 5, 4, 3, 2, 1]
-        self.assertEqual(max_integer(dlist), 6)
+    def test_positive_beginning(self):
+        """Tests for all positive with max at beginning"""
+        b = [200, 10, 8, 36, 14, 50]
+        self.assertEqual(max_integer(b), 200)
 
-    def empty_list(self):
-        '''
-            test for empty list
-        '''
+    def test_one_negative(self):
+        """Tests for list with one negative number"""
+        on = [200, 10, 8, -36, 14, 50]
+        self.assertEqual(max_integer(on), 200)
 
-        elist = []
-        self.assertEqual(max_integer(elist), None)
+    def test_all_negative(self):
+        """Tests for list with all negative numbers"""
+        n = [-6, -50, -75, -1, -100]
+        self.assertEqual(max_integer(n), -1)
 
-    def single_element(self):
-        '''
-            test for list with only one element
-        '''
+    def test_none(self):
+        """Tests for passing none as argument"""
+        with self.assertRaises(TypeError):
+            max_integer(None)
 
-        slist = [6]
-        self.assertEqual(max_integer(slist), 6)
-
-    def floats(self):
-        '''
-            test for floating point numbers
-        '''
-
-        flist = [1.63, 6.3, 7.12, -5.2, 16.2]
-        self.assertEqual(max_integer(flist), 16.2)
-
-    def int_floats(self):
-        '''
-            test for both int and float
-        '''
-
-        ilist = [12., 1.5, -7, 13.1, 6]
-        self.assertEqual(max_integer(ilist), 13.1)
-
-    def string(self):
-        '''
-            test for a string
-        '''
-
-        str = "Brennan"
-        self.assertEqual(max_integer(str), 'a')
-
-    def strings(self):
-        '''
-            test for a list of strings
-        '''
-
-        strings = ["Junior", "Ohanyere", "TwinJ", "Venetius"]
-        self.assertEqual(max_integer(strings), "Junior")
-
-    def empty_string(self):
-        '''
-            test for empty string
-        '''
-
-        self.assertEqual(max_integer(""), None)
+    def test_non_int_arg(self):
+        """Tests for a non-int type in list"""
+        string = [1, 2, "Hello", 4, 5]
+        with self.assertRaises(TypeError):
+            max_integer(string)
 
 if __name__ == "__main__":
     unittest.main()
