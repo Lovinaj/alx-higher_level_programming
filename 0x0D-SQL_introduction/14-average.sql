@@ -1,4 +1,4 @@
--- script that lists the number of records with the same score of a database
--- table in a MySQL server
+-- computes the score average of all records in a specific database table in a
+-- MySQL server
 
-SELECT score, COUNT(score) AS number FROM second_table GROUP BY score ORDER BY score DESC;
+SELECT AVG(score) AS average FROM second_table;
